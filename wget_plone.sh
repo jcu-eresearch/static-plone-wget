@@ -20,11 +20,11 @@ cookies_file="cookies-test.txt"
 login_file="login_form"
 
 function display_help {
-	echo "Usage: wget_plone.sh SITE_NAME [USERNAME] [PASSWORD]"
-	echo "When executed with a username and password, the script"
-	echo "attempts to authenticate with the site and obtain a session"
-	echo "cookie for access.  When used without login credentials, the"
-	echo "site is copied anonymously."
+	echo "Usage: wget_plone.sh SITE_NAME [USERNAME PASSWORD]
+	When executed with a username and password, the script
+	attempts to authenticate with the site and obtain a session
+	cookie for access.  When used without login credentials, the
+	site is copied anonymously."
 	exit 0
 }
 
@@ -47,7 +47,23 @@ fi
 
 #Get our Plone site down.
 if [[ -n "$2" ]] && [[ -n "$3" ]]; then
-        
+       
+        echo "
+	WARNING: Do NOT attempt to Wget a site with an admin
+	user account or account with elevated privileges as this 
+	process will hit ALL links on the site. You should only 
+	attempt this process with AT MOST a 'Reader' account or 
+	someone without Edit rights anywhere.
+	-----------------------------------------------------------
+	Consider yourself warned.  Do you wish to continue? (y/n)"
+	read -e acceptance
+
+	shopt -s nocasematch
+	if [[ $acceptance != "y" ]] && [[ $acceptance != "yes" ]]; then
+	    exit 0
+	fi
+        shopt -u nocasematch
+
         wget 	--keep-session-cookies 		\
 		--save-cookies "$cookies_file" 	\
 		--post-data "__ac_name#USAGE: ./wget_plone.sh SITE_NAME [username] [password]
