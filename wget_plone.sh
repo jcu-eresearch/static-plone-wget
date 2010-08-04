@@ -66,10 +66,7 @@ if [[ -n "$2" ]] && [[ -n "$3" ]]; then
 
         wget 	--keep-session-cookies 		\
 		--save-cookies "$cookies_file" 	\
-		--post-data "__ac_name#USAGE: ./wget_plone.sh SITE_NAME [username] [password]
-#When executed with a username and password, the script attempts to authenticate with the site
-#and obtain a session cookie for access.  When used without login credentials, the site is 
-#copied anonymously.=$2&__ac_password=$3&form.submitted=1&cookies_enabled=1&js_enabled=0" \
+		--post-data "__ac_name=$2&__ac_password=$3&form.submitted=1&cookies_enabled=1&js_enabled=0" \
 		--output-document="$login_file" \
 		$1/login_form
 
