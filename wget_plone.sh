@@ -128,6 +128,12 @@ if [[ -n $images ]]; then
 fi
 popd
 
+#Finally, remove any remaining absolute links.  These will include things we've exlcuded
+#such as login_form, sendto_form, search and so forth.  They will be replaced so they go 
+#nowhere.
+echo "Fixing up any remaining absolute links to point to --> '#'..."
+find $folder -name "*.html" -print0 | xargs -0 sed -i -r "s/$escaped_address[a-zA-Z0-9\_\/\.\=\%\&\:\;\-]*/\#/g"
+
 echo -e "Wget process complete.  Your site should now be \navailable in the $folder directory."
 cleanup 0
 
