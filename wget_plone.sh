@@ -134,7 +134,16 @@ popd
 echo "Fixing up any remaining absolute links to point to --> '#'..."
 find $folder -name "*.html" -print0 | xargs -0 sed -i -r "s/$escaped_address[a-zA-Z0-9\_\/\.\=\%\&\:\;\-]*/\#/g"
 
-echo -e "Wget process complete.  Your site should now be \navailable in the $folder directory."
+echo "View in your default web browser? (y/n)"
+read -e acceptance
+
+shopt -s nocasematch
+if [[ $acceptance == "y" ]] || [[ $acceptance == "yes" ]]; then
+    x-www-browser "$folder/index.html" &
+fi
+shopt -u nocasematch
+
+echo -e "Wget process complete.  Your site should now be available in the $folder directory."
 cleanup 0
 
 # vi: 
