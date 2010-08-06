@@ -8,14 +8,6 @@
 #and obtain a session cookie for access.  When used without login credentials, the site is 
 #copied anonymously.
 
-#IMPORTANT NOTES
-#   * Don't forget to turn your portal_css to "Link" & disable any portal actions or the like
-#     that you don't want maintained on/-to your site.
-#   * There may be issues with 'sub-directory' sites.  This script is fully successful with 
-#     top-level domain sites (eg www.myplonesite.org) but may have issues with sites like
-#     www.myplonesite.org/mysite/foo.
-
-
 cookies_file="cookies-test.txt"
 login_file="login_form"
 
