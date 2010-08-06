@@ -7,6 +7,8 @@ copied anonymously.
 
 IMPORTANT NOTES
 
+   * If using with a username and password, create a special user account with the Reader role only.
+     Also turn off user folders.
    * Don't forget to turn your portal_css entries to "Link".  Without this, Wget won't be able
 	 to see your CSS.
    * Disable any portal actions or the like that you don't want shown on your offline site.
