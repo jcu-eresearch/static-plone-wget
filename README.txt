@@ -6,14 +6,28 @@ and obtain a session cookie for access.  When used without login credentials, th
 copied anonymously.
 
 IMPORTANT NOTES
+===============
+
+   * Don't forget to turn your portal_css entries to "Link".  Without this, Wget won't be able
+     to see your CSS.
+
+   * Disable any portal actions or the like that you don't want shown on your offline site.
+
+     The script disables all dynamic content (eg login forms, search etc) but you may wish 
+     to remove aspects of your pages first before download.  It'll save you time!
+
+ABOUT LOGGED IN VIEWS OF SITES
+==============================
 
    * If using with a username and password, create a special user account with the Reader role only.
-     Also turn off user folders.
-   * Don't forget to turn your portal_css entries to "Link".  Without this, Wget won't be able
-	 to see your CSS.
-   * Disable any portal actions or the like that you don't want shown on your offline site.
-	 The script disables all dynamic content (eg login forms, search etc) but you may wish 
-     to remove aspects of your pages first before download.  It'll save you time!
+     Wget'ing your site with an Administrative user will have **disasterous** consequences!
+
+   * Turn off automatic user folder creation.
+
+
+ABOUT SUBDIRECTORY SITES
+========================
+
    * If you're going after a **subdirectory** site (eg plone.jcu.edu.au/foobar/) then you need to
      make sure that your home links end with a slash.  You'll need to hack this file (or similar):
 
@@ -33,9 +47,3 @@ IMPORTANT NOTES
          * /portal_skins/plone_portlets/portlet_navigation/manage_main , and change:
                  href root/absolute_url;   -->    href string:${root/absolute_url}/;
 
-
-% README.txt, 2010-08-06
-% @Last Change: 07-Jän-2005.
-% vi: 
-% Local Variables:
-% End:
