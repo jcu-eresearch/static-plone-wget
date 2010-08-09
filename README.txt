@@ -16,6 +16,17 @@ IMPORTANT NOTES
      The script disables all dynamic content (eg login forms, search etc) but you may wish 
      to remove aspects of your pages first before download.  It'll save you time!
 
+PLONE 2.5 OR EARLIER
+====================
+
+   * If you've got user folders you want to grab, remove 'index_html' from the Members folder
+     by using the ZMI.  This takes out the 'special' view the Members folder has and lets you
+     pick a normal layout for link spidering.
+
+   * To get *all* the content in a Plone 2.5 site, you'll need to enable the 'Contents' tab for
+     folders.  Head to the ZMI -> portal_actions -> turn 'Contents' visible.  The tab will now
+     appear like it does in Plone 3 and above.
+
 ABOUT LOGGED IN VIEWS OF SITES
 ==============================
 
@@ -23,7 +34,6 @@ ABOUT LOGGED IN VIEWS OF SITES
      Wget'ing your site with an Administrative user will have **disasterous** consequences!
 
    * Turn off automatic user folder creation.
-
 
 ABOUT SUBDIRECTORY SITES
 ========================
