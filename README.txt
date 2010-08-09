@@ -16,12 +16,11 @@ IMPORTANT NOTES
      The script disables all dynamic content (eg login forms, search etc) but you may wish 
      to remove aspects of your pages first before download.  It'll save you time!
 
+   * Seriously consider whether you need Calendar portlets.  They have custom links on
+     any page the portlet is on, so it's wise to disable these where possible.
+
 PLONE 2.5 OR EARLIER
 ====================
-
-   * If you've got user folders you want to grab, remove 'index_html' from the Members folder
-     by using the ZMI.  This takes out the 'special' view the Members folder has and lets you
-     pick a normal layout for link spidering.
 
    * To get *all* the content in a Plone 2.5 site, you'll need to enable the 'Contents' tab for
      folders.  Head to the ZMI -> portal_actions -> turn 'Contents' visible.  The tab will now
@@ -33,7 +32,11 @@ ABOUT LOGGED IN VIEWS OF SITES
    * If using with a username and password, create a special user account with the Reader role only.
      Wget'ing your site with an Administrative user will have **disasterous** consequences!
 
-   * Turn off automatic user folder creation.
+   * Turn off automatic user folder creation to prevent issues with the special user's folder.
+
+   * If you've got user folders you want to grab, remove 'index_html' from the Members folder
+     by using the ZMI.  This takes out the 'special' view the Members folder has and lets you
+     pick a normal layout for link spidering.
 
 ABOUT SUBDIRECTORY SITES
 ========================
