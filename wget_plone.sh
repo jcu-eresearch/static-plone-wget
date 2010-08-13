@@ -57,6 +57,7 @@ if [[ -n "$2" ]] && [[ -n "$3" ]]; then
         shopt -u nocasematch
 
         wget 	--keep-session-cookies 		\
+		--no-check-certificate		\
 		--save-cookies "$cookies_file" 	\
 		--post-data "__ac_name=$2&__ac_password=$3&form.submitted=1&cookies_enabled=1&js_enabled=0" \
 		--output-document="$login_file" \
@@ -72,30 +73,30 @@ if [[ -n "$2" ]] && [[ -n "$3" ]]; then
 		--no-parent 			\
 		--no-check-certificate 		\
 		--html-extension 		\
-		--restrict-file-names=windows 	\
 		--convert-links 		\
+		--restrict-file-names=windows 	\
 		--recursive			\
 		--level=inf 			\
 		--page-requisites 		\
 		--wait=0 			\
 		--quota=inf 			\
-		--reject "*_form, RSS, *login*, logged_in, *logout*, logged_out, selectViewTemplate*" 	\
-		--exclude-directories="search, author" \
+		--reject "*_form,RSS,*login*,logged_in,*logout*,logged_out,createObject*,selectViewTemplate*,object_cut,object_copy,object_rename,delete_confirmation,content_status_*" 	\
+		--exclude-directories="search" \
 		$1
 
 else
 	wget 	--no-parent 			\
 		--no-check-certificate 		\
 		--html-extension 		\
-		--restrict-file-names=windows 	\
 		--convert-links 		\
+		--restrict-file-names=windows 	\
 		--recursive			\
 		--level=inf 			\
 		--page-requisites 		\
 		--wait=0 			\
 		--quota=inf 			\
-		--reject "*_form, RSS, *login*, logged_in, *logout*, logged_out, selectViewTemplate*" 	\
-		--exclude-directories="search, author" \
+		--reject "*_form,RSS,*login*,logged_in,*logout*,logged_out,createObject*,selectViewTemplate*,object_cut,object_copy,object_rename,delete_confirmation,content_status_*" 	\
+		--exclude-directories="search" \
 		$1
 fi
 
