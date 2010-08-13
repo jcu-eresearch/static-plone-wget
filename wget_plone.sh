@@ -80,7 +80,7 @@ if [[ -n "$2" ]] && [[ -n "$3" ]]; then
 		--page-requisites 		\
 		--wait=0 			\
 		--quota=inf 			\
-		--reject "*_form,RSS,*login*,logged_in,*logout*,logged_out,createObject*,selectViewTemplate*,object_cut,object_copy,object_rename,delete_confirmation,content_status_*" 	\
+		--reject "*_form,RSS,*login*,logged_in,*logout*,logged_out,createObject*,select_default_page,selectViewTemplate*,object_cut,object_copy,object_rename,delete_confirmation,content_status_*" 	\
 		--exclude-directories="search" \
 		$1
 
@@ -95,7 +95,7 @@ else
 		--page-requisites 		\
 		--wait=0 			\
 		--quota=inf 			\
-		--reject "*_form,RSS,*login*,logged_in,*logout*,logged_out,createObject*,selectViewTemplate*,object_cut,object_copy,object_rename,delete_confirmation,content_status_*" 	\
+		--reject "*_form,RSS,*login*,logged_in,*logout*,logged_out,createObject*,select_default_page,selectViewTemplate*,object_cut,object_copy,object_rename,delete_confirmation,content_status_*" 	\
 		--exclude-directories="search" \
 		$1
 fi
