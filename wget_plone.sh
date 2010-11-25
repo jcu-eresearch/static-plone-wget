@@ -78,6 +78,7 @@ if [[ -n "$2" ]] && [[ -n "$3" ]]; then
 		--recursive			\
 		--level=inf 			\
 		--page-requisites 		\
+	        -e robots=off    		\	
 		--wait=0 			\
 		--quota=inf 			\
 		--reject "*_form,RSS,*login*,logged_in,*logout*,logged_out,createObject*,select_default_page,selectViewTemplate*,object_cut,object_copy,object_rename,delete_confirmation,content_status_*,addtoFavorites" 	\
@@ -93,6 +94,7 @@ else
 		--recursive			\
 		--level=inf 			\
 		--page-requisites 		\
+	        -e robots=off    		\	
 		--wait=0 			\
 		--quota=inf 			\
 		--reject "*_form,RSS,*login*,logged_in,*logout*,logged_out,createObject*,select_default_page,selectViewTemplate*,object_cut,object_copy,object_rename,delete_confirmation,content_status_*,addtoFavorites" 	\
