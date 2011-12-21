@@ -1,14 +1,32 @@
 Wget Downloader Script, specifically for Plone sites
 ====================================================
 
+Disclaimer
+----------
+
+This script can potentially be **very** damaging if used incorrectly. This
+script uses recursive ``wget``, which means it will spider every link it
+finds.  This will be fine for anonymous users and public views of sites.
+However, given Plone offers content and administrative controls for logged-in
+users, hitting every link will likely move/rename/delete content, change site
+settings, and, in general, be a **very bad thing**. 
+
+If you do want an internal view of a Plone instance, then create a Reader
+account and use this. You will want to check that someone with Reader access
+doesn't get some extra permissions if you've customised things like your
+workflow's security.
+
+This tool is designed for Plone so it may or may not work with other tools.  
+In any case, absolutely no warranty is given for its suitability.
+
 Usage
 -----
 
     ./wget_plone.sh SITE_NAME [username] [password]
 
-When executed with a username and password, the script attempts to authenticate
-with the site and obtain a session cookie for access.  When used without login
-credentials, the site is copied anonymously.
+When executed with a username and password, the script attempts to
+authenticate with the site and obtain a session cookie for access.  When used
+without login credentials, the site is copied anonymously.
 
 Requirements
 ------------

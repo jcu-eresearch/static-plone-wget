@@ -1,0 +1,8 @@
+Change History
+==============
+
+1.0 (unreleased)
+------------------
+
+- Created initial wget downloader script and uploaded to GitHub.
+  [davidjb]
