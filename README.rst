@@ -66,7 +66,7 @@ About logged in views of sites
 
 * If using with a username and password, create a special user account with
   the `Reader` role only.  Wget'ing your site with an Administrative user
-  will have **disasterous** consequences!
+  will have **disastrous** consequences!
 
 * Turn off automatic user folder creation to prevent issues with the special
   user's folder.
