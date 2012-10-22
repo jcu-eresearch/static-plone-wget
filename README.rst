@@ -97,6 +97,6 @@ About subdirectory sites
   also need to modify the other parts of Plone too if they don't use this 
   method.  These currently include:
       
-      * `/portal_skins/plone_portlets/portlet_navigation/manage_main`
-        Change `href root/absolute_url;` to `href string:${root/absolute_url}/;`
+  * `/portal_skins/plone_portlets/portlet_navigation/manage_main`
+     Change `href root/absolute_url;` to `href string:${root/absolute_url}/;`
 
