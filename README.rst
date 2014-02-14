@@ -1,23 +1,14 @@
-Wget Downloader Script, specifically for Plone sites
-====================================================
+Wget Downloader Script
+======================
 
-Disclaimer
-----------
+Need to archive a site to static HTML?  Here's a Bash script for
+converting your dynamic site (primarily Plone) into a functional,
+offline collection of files. Powered by Wget, it slices, dices
+and mixes your currently-hosted site into a set of files
+that you can either view locally or host on any web server.
 
-This script can potentially be **very** damaging if used incorrectly. This
-script uses recursive ``wget``, which means it will spider every link it
-finds.  This will be fine for anonymous users and public views of sites.
-However, given Plone offers content and administrative controls for logged-in
-users, hitting every link will likely move/rename/delete content, change site
-settings, and, in general, be a **very bad thing**. 
-
-If you do want an internal view of a Plone instance, then create a Reader
-account and use this. You will want to check that someone with Reader access
-doesn't get some extra permissions if you've customised things like your
-workflow's security.
-
-This tool is designed for Plone so it may or may not work with other tools.  
-In any case, absolutely no warranty is given for its suitability.
+Read the `Disclaimer`_ further down this page for a number of 
+warnings.
 
 Usage
 -----
@@ -34,6 +25,12 @@ Requirements
 * Recent version of Wget (tested with Wget 1.12)
 * Recent version of Bash (tested on 4.2.8(1) on Ubuntu <= 11.04)
 * Plone site to archive (tested on Plone 2.5.x and Plone 3.x)
+
+Used with
+---------
+
+* Plone 2.5.x, 3.x, 4.x
+* Joomla 1.5 (authentication not supported)
 
 Important notes
 ---------------
@@ -100,3 +97,22 @@ About subdirectory sites
   * `/portal_skins/plone_portlets/portlet_navigation/manage_main`
      Change `href root/absolute_url;` to `href string:${root/absolute_url}/;`
 
+Disclaimer
+----------
+
+This script can potentially be **very** damaging if used incorrectly. This
+script uses recursive ``wget``, which means it will spider every link it
+finds.  This will be fine for anonymous users and public views of sites.
+However, given Plone offers content and administrative controls for logged-in
+users, hitting every link will likely move/rename/delete content, change site
+settings, and, in general, be a **very bad thing**. 
+
+If you do want an internal view of a Plone instance, then create a Reader
+account and use this. You will want to check that someone with Reader access
+doesn't get some extra permissions if you've customised things like your
+workflow's security.
+
+This tool is designed for Plone so it may or may not work with other types
+of sites.
+
+In any case, absolutely no warranty is given for its suitability.
