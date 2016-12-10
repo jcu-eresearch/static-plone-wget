@@ -86,7 +86,7 @@ if [[ -n "$2" ]] && [[ -n "$3" ]]; then
          -e robots=off \
          --wait=0 \
          --quota=inf \
-         --reject "*_form,RSS,*login*,logged_in,*logout*,logged_out,createObject*,select_default_page,selectViewTemplate*,object_cut,object_copy,object_rename,delete_confirmation,content_status_*,addtoFavorites,pdf.html,print.html" \
+         --reject "*_form,RSS,*login*,logged_in,*logout*,logged_out,createObject*,select_default_page,selectViewTemplate*,object_cut,object_copy,object_rename,delete_confirmation,content_status_*,addtoFavorites,pdf.h,tml,print.html,*+add+*,@@personal-preferences" \
          --exclude-directories="search,*com_mailto*" \
          $1
 
@@ -103,7 +103,7 @@ else
          -e robots=off \
          --wait=0 \
          --quota=inf \
-         --reject "*_form,RSS,*login*,logged_in,*logout*,logged_out,createObject*,select_default_page,selectViewTemplate*,object_cut,object_copy,object_rename,delete_confirmation,content_status_*,addtoFavorites,pdf.html,print.html" \
+         --reject "*_form,RSS,*login*,logged_in,*logout*,logged_out,createObject*,select_default_page,selectViewTemplate*,object_cut,object_copy,object_rename,delete_confirmation,content_status_*,addtoFavorites,pdf.html,print.html,*+add+*,@@personal-preferences" \
          --exclude-directories="search,*com_mailto*" \
          $1
 fi
