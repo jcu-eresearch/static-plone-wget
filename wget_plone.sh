@@ -1,7 +1,8 @@
 #!/bin/bash
 # wget_plone.sh -- created 2010-02-25, davidjb.com
-# @Last Change: 30-July-2010.
-# @Revision:    2.0
+# @Last Change: 10-Dec-2016.
+# @contributors: J. Gutow <gutow@uwosh.edu>
+# @Revision:    2.0.1
 
 #USAGE: ./wget_plone.sh SITE_NAME [username] [password]
 #When executed with a username and password, the script attempts to authenticate with the site
@@ -86,7 +87,7 @@ if [[ -n "$2" ]] && [[ -n "$3" ]]; then
          -e robots=off \
          --wait=0 \
          --quota=inf \
-         --reject "*_form,RSS,*login*,logged_in,*logout*,logged_out,createObject*,select_default_page,selectViewTemplate*,object_cut,object_copy,object_rename,delete_confirmation,content_status_*,addtoFavorites,pdf.html,print.html" \
+         --reject "*_form,RSS,*login*,logged_in,*logout*,logged_out,createObject*,select_default_page,selectViewTemplate*,object_cut,object_copy,object_rename,delete_confirmation,content_status_*,addtoFavorites,pdf.html,print.html,*+add+*,@@personal-preferences" \
          --exclude-directories="search,*com_mailto*" \
          $1
 
@@ -103,7 +104,7 @@ else
          -e robots=off \
          --wait=0 \
          --quota=inf \
-         --reject "*_form,RSS,*login*,logged_in,*logout*,logged_out,createObject*,select_default_page,selectViewTemplate*,object_cut,object_copy,object_rename,delete_confirmation,content_status_*,addtoFavorites,pdf.html,print.html" \
+         --reject "*_form,RSS,*login*,logged_in,*logout*,logged_out,createObject*,select_default_page,selectViewTemplate*,object_cut,object_copy,object_rename,delete_confirmation,content_status_*,addtoFavorites,pdf.html,print.html,*+add+*,@@personal-preferences" \
          --exclude-directories="search,*com_mailto*" \
          $1
 fi
