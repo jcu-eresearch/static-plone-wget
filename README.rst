@@ -22,9 +22,9 @@ without login credentials, the site is copied anonymously.
 Requirements
 ------------
 
-* Recent version of Wget (tested with Wget 1.12)
-* Recent version of Bash (tested on 4.2.8(1) on Ubuntu <= 11.04)
-* Plone site to archive (tested on Plone 2.5.x and Plone 3.x)
+* Recent version of Wget (tested with Wget 1.15)
+* Recent version of Bash (tested on 4.3.11 on Ubuntu <= 14.04)
+* Plone site to archive (tested on Plone 2.5.x, Plone 3.x, Plone 5.x)
 
 Used with
 ---------
@@ -62,8 +62,9 @@ About logged in views of sites
 ------------------------------
 
 * If using with a username and password, create a special user account with
-  the `Reader` role only.  Wget'ing your site with an Administrative user
-  will have **disastrous** consequences!
+  the `Reader` role only or the 'static_backup' role described below.
+  Wget'ing your site with an Administrative user will have **disastrous**
+  consequences!
 
 * Turn off automatic user folder creation to prevent issues with the special
   user's folder.
@@ -132,10 +133,21 @@ However, given Plone offers content and administrative controls for logged-in
 users, hitting every link will likely move/rename/delete content, change site
 settings, and, in general, be a **very bad thing**. 
 
-If you do want an internal view of a Plone instance, then create a Reader
-account and use this. You will want to check that someone with Reader access
-doesn't get some extra permissions if you've customised things like your
-workflow's security.
+_Recommendation_to_protect_your_site_
+Rather than do the backup from the active site make a complete duplicate of
+the Plone folder (usually called 'Plone' by default) but with a different name
+at the same level in the directory structure (this makes all relativel links 
+work). Edit the buildout.cfg to change the port to some local port that is not
+being used. Run ``./bin/buildout`` to set the new port. Start the copy of the site
+in foreground mode so that you can see any problems: ``./bin/plonectl fg``. Use
+a local web browser to access the site at ``localhost:XXXX/SiteName``, where XXXX
+is the port number and check that login of your the user you are going to use
+for backup works. Now you can run ``./wget_plone.sh SITE_NAME [username] [password]``.
+
+If you do want an internal view of a Plone instance, then create a Reader or
+static_backup account and use this. If you use a Reader account you will want to 
+check that someone with Reader access doesn't get some extra permissions if you've
+customised things like your workflow's security.
 
 This tool is designed for Plone so it may or may not work with other types
 of sites.
