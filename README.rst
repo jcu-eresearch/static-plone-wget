@@ -133,15 +133,15 @@ However, given Plone offers content and administrative controls for logged-in
 users, hitting every link will likely move/rename/delete content, change site
 settings, and, in general, be a **very bad thing**. 
 
-_Recommendation_to_protect_your_site_
+**Recommendation to protect your site**:
 Rather than do the backup from the active site make a complete duplicate of
 the Plone folder (usually called 'Plone' by default) but with a different name
-at the same level in the directory structure (this makes all relativel links 
+at the same level in the directory structure (this makes all relative links 
 work). Edit the buildout.cfg to change the port to some local port that is not
 being used. Run ``./bin/buildout`` to set the new port. Start the copy of the site
 in foreground mode so that you can see any problems: ``./bin/plonectl fg``. Use
 a local web browser to access the site at ``localhost:XXXX/SiteName``, where XXXX
-is the port number and check that login of your the user you are going to use
+is the port number and check that login of the user you are going to use
 for backup works. Now you can run ``./wget_plone.sh SITE_NAME [username] [password]``.
 
 If you do want an internal view of a Plone instance, then create a Reader or
