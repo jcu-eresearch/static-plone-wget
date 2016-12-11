@@ -1,6 +1,13 @@
 Change History
 ==============
 
+2.0.1
+----------------
+Small updates to make work cleanly with Plone 5.x.
+Larger changes to the instructions to clarify how
+to use.
+J. Gutow <gutow@uwosh.edu>
+
 1.0 (unreleased)
 ------------------
 
