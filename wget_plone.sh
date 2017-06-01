@@ -114,6 +114,9 @@ folder=$1
 folder=${folder##http://}
 folder=${folder##https://}
 folder=${folder%%/}
+#present wget version replaces ':' with '+', probably to avoid issues with
+#MacOS style paths.
+folder=${folder//:/+}
 
 #Start formatting our actual web address accordingly
 escaped_address=${1%%/}
