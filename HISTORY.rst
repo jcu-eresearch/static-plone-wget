@@ -1,6 +1,14 @@
 Change History
 ==============
 
+3.0.0 (unreleased)
+------------------
+
+* Add basic macOS support (requires gnu-sed to be installed)
+* Simplify various commands (eg ``find -exec`` rather than pipes and xargs)
+* Lint codebase via shellcheck
+* History file uses .rst extension
+
 2.0.1
 ----------------
 Small updates to make work cleanly with Plone 5.x.

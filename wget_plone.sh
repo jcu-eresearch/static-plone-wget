@@ -1,18 +1,21 @@
 #!/bin/bash
 # wget_plone.sh -- created 2010-02-25, davidjb.com
-# @Last Change: 10-Dec-2016.
+# @Last Change: 2017-11-29
 # @contributors: J. Gutow <gutow@uwosh.edu>
-# @Revision:    2.0.1
+# @Revision:    3.0.0
 
 #USAGE: ./wget_plone.sh SITE_NAME [username] [password]
 #When executed with a username and password, the script attempts to authenticate with the site
-#and obtain a session cookie for access.  When used without login credentials, the site is 
+#and obtain a session cookie for access.  When used without login credentials, the site is
 #copied anonymously.
 #
-#Joomla: 
+#Joomla:
 #find . -name "pdf.html" -print0 | xargs -0 rename 's/pdf.html/article.pdf/g'
 #find . -name "*.html" -print0 | xargs -0 sed -i "s/pdf.html/article.pdf/g"
 
+GNUSED=sed
+BROWSER_COMMAND=x-www-browser
+[[ $OSTYPE == "darwin"*  ]] && GNUSED=gsed && BROWSER_COMMAND=open
 
 cookies_file="cookies-test.txt"
 login_file="login_form"
@@ -36,7 +39,7 @@ function cleanup {
         rm --verbose "$login_file"
     fi
 
-    exit $1
+    exit "$1"
 }
 
 if [[ "$1" == "--help" ]] || [[ -z "$1" ]]; then
@@ -48,16 +51,16 @@ fi
 if [[ -n "$2" ]] && [[ -n "$3" ]]; then
     echo "
     WARNING: Do NOT attempt to Wget a site with an admin
-    user account or account with elevated privileges as this 
-    process will hit ALL links on the site. You should only 
-    attempt this process with AT MOST a 'Reader' account or 
+    user account or account with elevated privileges as this
+    process will hit ALL links on the site. You should only
+    attempt this process with AT MOST a 'Reader' account or
     someone without Edit rights anywhere.
     -----------------------------------------------------------
     Consider yourself warned.  Do you wish to continue? (y/n)"
-    read -e acceptance
+    read -r -e acceptance
 
     shopt -s nocasematch
-    if [[ $acceptance != "y" ]] && [[ $acceptance != "yes" ]]; then
+    if [[ "$acceptance" != "y" ]] && [[ "$acceptance" != "yes" ]]; then
         exit 0
     fi
     shopt -u nocasematch
@@ -67,9 +70,9 @@ if [[ -n "$2" ]] && [[ -n "$3" ]]; then
          --save-cookies "$cookies_file" \
          --post-data "__ac_name=$2&__ac_password=$3&form.submitted=1&cookies_enabled=1&js_enabled=0" \
          --output-document="$login_file" \
-         $1/login_form
+         "$1/login_form"
 
-    if [[ `cat $cookies_file | wc -l` -lt 5 ]]; then
+    if [[ $(wc -l < "$cookies_file") -lt 5 ]]; then
         echo "Cookie file size too short.  Confirm that you entered the right username and password."
         echo "Aborting wget process..."
         cleanup 1
@@ -89,7 +92,7 @@ if [[ -n "$2" ]] && [[ -n "$3" ]]; then
          --quota=inf \
          --reject "*_form,RSS,*login*,logged_in,*logout*,logged_out,createObject*,select_default_page,selectViewTemplate*,object_cut,object_copy,object_rename,delete_confirmation,content_status_*,addtoFavorites,pdf.html,print.html,*+add+*,@@personal-preferences" \
          --exclude-directories="search,*com_mailto*" \
-         $1
+         "$1"
 
 # Without authentication
 else
@@ -106,7 +109,7 @@ else
          --quota=inf \
          --reject "*_form,RSS,*login*,logged_in,*logout*,logged_out,createObject*,select_default_page,selectViewTemplate*,object_cut,object_copy,object_rename,delete_confirmation,content_status_*,addtoFavorites,pdf.html,print.html,*+add+*,@@personal-preferences" \
          --exclude-directories="search,*com_mailto*" \
-         $1
+         "$1"
 fi
 
 #Normalise the folder name, removing protocol and any slashes from the end
@@ -116,36 +119,36 @@ folder=${folder##https://}
 folder=${folder%%/}
 
 #Start formatting our actual web address accordingly
-escaped_address=${1%%/}
+root_url=${1%%/}
 
 #Escape our site URL for use within the upcoming commands
-escaped_address=${escaped_address////\\\/}
+escaped_address=${root_url////\\\/}
 
 #Get and fix up references to images within CSS.
-pushd $folder/portal_css/*
-images=`grep -R -h -o -P "$escaped_address/?([\w])+\.(png|gif|jpg)" *`
+pushd "$folder"/portal_css/*
+images=$(grep -R -h -o -E "$root_url/.*\.(png|gif|jpg|bmp|ico|tiff|svg|webp)" ./*)
 if [[ -n $images ]]; then
-    echo ${images} | xargs wget -nc
-    find . -name "*.css" -print0 | xargs -0 sed -i "s/$escaped_address\///g"
+    echo "${images}" | xargs wget -nc
+    find . -name "*.css" -exec $GNUSED -i "s/$escaped_address\///g" "{}" \;
 fi
 popd
 
 #Finally, remove any remaining absolute links.  These will include things we've exlcuded
-#such as login_form, sendto_form, search and so forth.  They will be replaced so they go 
+#such as login_form, sendto_form, search and so forth.  They will be replaced so they go
 #nowhere.
 echo "Fixing up any remaining absolute links to point to --> '#'..."
-find $folder -name "*.html" -print0 | xargs -0 sed -i -r "s/$escaped_address[a-zA-Z0-9\_\/\.\=\%\&\:\;\-]*/\#/g"
+find "$folder" -name "*.html" -exec $GNUSED -i -r "s/$escaped_address[a-zA-Z0-9\_\/\.\=\%\&\:\;\-]*/\#/g" "{}" \;
 
 echo "View in your default web browser? (y/n)"
-read -e acceptance
+read -r -e acceptance
 
 shopt -s nocasematch
 if [[ $acceptance == "y" ]] || [[ $acceptance == "yes" ]]; then
-    x-www-browser "$folder/index.html" &
+    $BROWSER_COMMAND "$folder/index.html" &
 fi
 shopt -u nocasematch
 
 echo -e "Wget process complete.  Your site is now available in the $folder directory."
 cleanup 0
 
-# vi: 
+# vi:
