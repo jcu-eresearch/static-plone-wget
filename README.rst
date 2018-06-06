@@ -15,7 +15,7 @@ Usage
 
 ::
 
-    ./wget_plone.sh SITE_NAME [username] [password]
+    ./wget_plone.sh SITE_URL [username] [password]
 
 When executed with a username and password, the script attempts to
 authenticate with the site and obtain a session cookie for access.  When used
