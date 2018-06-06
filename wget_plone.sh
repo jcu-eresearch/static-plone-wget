@@ -13,8 +13,8 @@
 #find . -name "pdf.html" -print0 | xargs -0 rename 's/pdf.html/article.pdf/g'
 #find . -name "*.html" -print0 | xargs -0 sed -i "s/pdf.html/article.pdf/g"
 
-GNUSED=sed
-BROWSER_COMMAND=x-www-browser
+GNUSED='sed'
+BROWSER_COMMAND="x-www-browser"
 [[ $OSTYPE == "darwin"*  ]] && GNUSED=gsed && BROWSER_COMMAND=open
 
 cookies_file="cookies-test.txt"
