@@ -8,6 +8,8 @@ Change History
 * Simplify various commands (eg ``find -exec`` rather than pipes and xargs)
 * Lint codebase via shellcheck
 * History file uses .rst extension
+* Use ``--adjust-extension`` argument as ``--html-extension`` is deprecated as
+  of back in wget 1.12
 
 2.0.1
 ----------------

@@ -1,6 +1,6 @@
 #!/bin/bash
 # wget_plone.sh -- created 2010-02-25, davidjb.com
-# @Last Change: 2017-11-29
+# @Last Change: 2018-06-07
 # @contributors: J. Gutow <gutow@uwosh.edu>
 # @Revision:    3.0.0
 
@@ -81,7 +81,7 @@ if [[ -n "$2" ]] && [[ -n "$3" ]]; then
     wget --load-cookies $cookies_file \
          --no-parent \
          --no-check-certificate \
-         --html-extension \
+         --adjust-extension \
          --convert-links \
          --restrict-file-names=windows \
          --recursive \
@@ -98,7 +98,7 @@ if [[ -n "$2" ]] && [[ -n "$3" ]]; then
 else
     wget --no-parent \
          --no-check-certificate \
-         --html-extension \
+         --adjust-extension \
          --convert-links \
          --restrict-file-names=windows \
          --recursive \
