@@ -46,6 +46,30 @@ function cleanup {
     exit "$1"
 }
 
+# https://github.com/SixArm/urlencode.sh
+# License: MIT
+# Contact: Joel Parker Henderson (joel@joelparkerhenderson.com)
+urlencode() {
+    # urlencode <string>
+    old_lang=$LANG
+    LANG=C
+
+    old_lc_collate=$LC_COLLATE
+    LC_COLLATE=C
+
+    local length="${#1}"
+    for (( i = 0; i < length; i++ )); do
+        local c="${1:i:1}"
+        case $c in
+            [a-zA-Z0-9.~_-]) printf "%s" "$c" ;;
+            *) printf '%%%02X' "'$c" ;;
+        esac
+    done
+
+    LANG=$old_lang
+    LC_COLLATE=$old_lc_collate
+}
+
 
 # Get our Plone site down!
 # With authentication
@@ -66,10 +90,12 @@ if [[ -n "$2" ]] && [[ -n "$3" ]]; then
     fi
     shopt -u nocasematch
 
+    username=$(urlencode "$2")
+    password=$(urlencode "$3")
     wget --keep-session-cookies \
          --no-check-certificate \
          --save-cookies "$cookies_file" \
-         --post-data "__ac_name=$2&__ac_password=$3&form.submitted=1&cookies_enabled=1&js_enabled=0" \
+         --post-data "__ac_name=$username&__ac_password=$password&form.submitted=1&cookies_enabled=1&js_enabled=0" \
          --output-document="$login_file" \
          "$1/login_form"
 
