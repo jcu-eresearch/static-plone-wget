@@ -1,6 +1,6 @@
 #!/bin/bash
-# wget_plone.sh -- created 2010-02-25, davidjb.com
-# @Last Change: 2018-06-07
+# wget_plone.sh -- created 2010-02-25, @davidjb
+# @Last Change: 2019-08-07
 # @contributors: J. Gutow <gutow@uwosh.edu>
 # @Revision:    3.0.0
 
@@ -29,6 +29,10 @@ function display_help {
     exit 0
 }
 
+if [[ "$1" == "--help" ]] || [[ -z "$1" ]]; then
+    display_help
+fi
+
 function cleanup {
     echo "Cleaning up files.  Please remain calm."
     if [[ -e "$cookies_file" ]]; then
@@ -42,9 +46,6 @@ function cleanup {
     exit "$1"
 }
 
-if [[ "$1" == "--help" ]] || [[ -z "$1" ]]; then
-    display_help
-fi
 
 # Get our Plone site down!
 # With authentication
